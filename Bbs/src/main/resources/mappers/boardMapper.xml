@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.mappers.board">
+	<select id="selectAll" resultType="kr.co.domain.BoardVO">
+		select	board_Id,
+				title,
+				content,
+				writer,
+				regDate,
+				viewCount
+		from	board
+	</select>
+	<insert id="write" parameterType="kr.co.domain.BoardVO">
+		insert into board(title,content,writer)
+				values(#{title},#{content},#{writer})
+	</insert>
+	<select id="view" parameterType="int" resultType="kr.co.domain.BoardVO">
+		select	board_id,
+				title,
+				content,
+				writer,
+				regDate,
+				viewCount
+		from	board
+		where board_id = #{board_id}
+	</select>
+	
+	<update id="modify" parameterType="kr.co.domain.BoardVO">
+		update board
+		set	title = #{title},
+			content = #{content},
+			writer = #{writer}
+		where board_id = #{board_id}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete 
+			from board
+		where board_id = #{board_id}
+	</delete>
+</mapper>
